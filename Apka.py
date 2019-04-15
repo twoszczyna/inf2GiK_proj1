@@ -35,6 +35,10 @@ class AppWindow(QWidget):
         xDlabel=QLabel('x D',self)
         yDlabel=QLabel('y D',self)
         polozenielabel=QLabel('polozenie prostych',self)
+        
+        self.btncol.setToolTip('wybierz kolor wykresu')
+        self.btnsave.setToolTip('zapisz współrzędne pnnktu P do pliku')
+        self.btn.setToolTip('nacinij aby narysowac wykres')
     
         self.xAEdit=QLineEdit()
         self.yAEdit=QLineEdit()
@@ -116,7 +120,7 @@ class AppWindow(QWidget):
         self.SprawdzWartosc()
         
         
-    #sprawdzenie czy wprowadzane przez użytkownika warto
+    #sprawdzenie czy wprowadzane przez użytkownika wartosci sa wartosciami liczbowymi oraz przeliczenie 
     def SprawdzWartosc(self,col='red'):
         xA=self.sprawdzwartosc(self.xAEdit)
         yA=self.sprawdzwartosc(self.yAEdit)
@@ -152,11 +156,11 @@ class AppWindow(QWidget):
             ax=self.figure.add_subplot(111)  
             ax.scatter(X2,Y2)
             ax.plot([xA,xB],[yA,yB] ,color=col,marker='o')
-            ax.plot([xC,xD],[yC,yD] ,color=col,marker='o')
+            ax.plot([xC,xD],[yC,yD] ,color=col,marker='o')  #rysowanie wykresu
             ax.plot([xA,self.xP],[yA,self.yP] ,linestyle='--', color='red')
             ax.plot([xD,self.xP],[yD,self.yP] ,linestyle='--', color='blue')
             for (x,y,l) in zip(X2,Y2,enumerate(x1)):
-                ax.annotate("{}({};{})".format(l[1],x,y), xy=(x,y))
+                ax.annotate("{}({};{})".format(l[1],x,y), xy=(x,y)) #etykiety do punktów
            
             self.canvas.draw()
             
@@ -167,6 +171,7 @@ class AppWindow(QWidget):
         else:
             element.setFocus()
             return None 
+        #zapis wyniku do pliku txt
     def zapisz(self):
         plik1=open('proj_1_wsp_pkt_P.txt','w+')#stworzenie pliku tekstowego
         plik1.write(80*'-')
