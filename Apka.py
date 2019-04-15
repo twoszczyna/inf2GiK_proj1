@@ -6,6 +6,7 @@ Created on Tue Mar 26 10:19:27 2019
 """
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLineEdit, QLabel, QGridLayout, QColorDialog
+from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
@@ -13,9 +14,10 @@ import matplotlib.pyplot as plt
 class AppWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.title='matplotlib przykład'
+        self.title='Wyznaczanie przecięcia dwóch punktów'
         self.initInterface()
         self.initWidgets()
+        self.setWindowIcon(QIcon('calculator.png'))
         
     def initInterface(self):
         self.setWindowTitle(self.title)
@@ -36,9 +38,9 @@ class AppWindow(QWidget):
         yDlabel=QLabel('y D',self)
         polozenielabel=QLabel('polozenie prostych',self)
         
-        self.btncol.setToolTip('wybierz kolor wykresu')
-        self.btnsave.setToolTip('zapisz współrzędne pnnktu P do pliku')
-        self.btn.setToolTip('nacinij aby narysowac wykres')
+        btncol.setToolTip('wybierz kolor wykresu')
+        btnsave.setToolTip('zapisz współrzędne pnnktu P do pliku')
+        btn.setToolTip('nacinij aby narysowac wykres')
     
         self.xAEdit=QLineEdit()
         self.yAEdit=QLineEdit()
